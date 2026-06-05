@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#0f6f6a">
+    <meta name="description" content="A fast family dice roller for board games, Risk battles, and custom dice pools.">
+    <title>Kid Dice</title>
+    <link rel="manifest" href="manifest.webmanifest">
+    <link rel="apple-touch-icon" href="icons/icon-192.svg">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Family board games</p>
+          <h1>Kid Dice</h1>
+        </div>
+        <button class="icon-button" id="soundToggle" type="button" aria-label="Toggle sound">
+          <span aria-hidden="true">♪</span>
+        </button>
+      </header>
+
+      <section class="hero" aria-label="Dice roller">
+        <div class="mode-tabs" role="tablist" aria-label="Roll mode">
+          <button class="mode-tab active" type="button" data-mode="quick" role="tab" aria-selected="true">Quick</button>
+          <button class="mode-tab" type="button" data-mode="battle" role="tab" aria-selected="false">Battle</button>
+          <button class="mode-tab" type="button" data-mode="custom" role="tab" aria-selected="false">Custom</button>
+        </div>
+
+        <div class="stage" id="stage" aria-live="polite">
+          <div class="dice-field" id="diceField"></div>
+          <div class="result-line" id="resultLine">Tap a preset to roll</div>
+        </div>
+
+        <div class="panel mode-panel active" id="quickPanel">
+          <div class="preset-grid">
+            <button class="preset-button primary" type="button" data-roll="quick" data-count="1">1 die</button>
+            <button class="preset-button primary" type="button" data-roll="quick" data-count="2">2 dice</button>
+            <button class="preset-button" type="button" data-roll="quick" data-count="3">3 dice</button>
+            <button class="preset-button" type="button" data-roll="quick" data-count="4">4 dice</button>
+          </div>
+        </div>
+
+        <div class="panel mode-panel" id="battlePanel">
+          <div class="versus">
+            <label>
+              <span>Attacker</span>
+              <select id="attackDice">
+                <option value="1">1 die</option>
+                <option value="2">2 dice</option>
+                <option value="3" selected>3 dice</option>
+              </select>
+            </label>
+            <strong>vs</strong>
+            <label>
+              <span>Defender</span>
+              <select id="defenseDice">
+                <option value="1">1 die</option>
+                <option value="2" selected>2 dice</option>
+                <option value="3">3 dice</option>
+              </select>
+            </label>
+          </div>
+          <button class="roll-button" type="button" data-roll="battle">Roll battle</button>
+          <div class="battle-score" id="battleScore"></div>
+        </div>
+
+        <div class="panel mode-panel" id="customPanel">
+          <div class="custom-controls">
+            <label>
+              <span>Dice</span>
+              <input id="customCount" type="number" min="1" max="12" value="5" inputmode="numeric">
+            </label>
+            <label>
+              <span>Sides</span>
+              <input id="customSides" type="number" min="2" max="100" value="6" inputmode="numeric">
+            </label>
+          </div>
+          <button class="roll-button" type="button" data-roll="custom">Roll pool</button>
+        </div>
+      </section>
+
+      <section class="history-wrap" aria-label="Roll history">
+        <div class="section-head">
+          <h2>History</h2>
+          <button class="text-button" id="clearHistory" type="button">Clear</button>
+        </div>
+        <ol class="history" id="history"></ol>
+      </section>
+    </main>
+
+    <script src="app.js" defer></script>
+  </body>
+</html>
