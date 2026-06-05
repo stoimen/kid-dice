@@ -119,6 +119,7 @@ h2 {
 
 .mode-tab,
 .preset-button,
+.dice-count,
 .roll-button,
 .text-button,
 select,
@@ -235,6 +236,7 @@ input {
 }
 
 .preset-button,
+.dice-count,
 .roll-button {
   border: 0;
   color: var(--ink);
@@ -244,6 +246,7 @@ input {
 }
 
 .preset-button.primary,
+.dice-count.active,
 .roll-button {
   color: white;
   background: var(--coral);
@@ -272,6 +275,26 @@ input {
   color: var(--ink);
   background: white;
   font-weight: 900;
+}
+
+.dice-slider {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.dice-count {
+  border: 1px solid rgba(24, 32, 31, 0.14);
+  background: white;
+  transition: background 140ms ease, color 140ms ease, transform 140ms ease;
+}
+
+.dice-count.active {
+  border-color: transparent;
+}
+
+.dice-count:active {
+  transform: scale(0.96);
 }
 
 .versus strong {

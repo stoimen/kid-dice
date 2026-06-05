@@ -120,8 +120,8 @@ function handleQuick(count) {
 }
 
 function handleBattle() {
-  const attackCount = Number(document.querySelector("#attackDice").value);
-  const defenseCount = Number(document.querySelector("#defenseDice").value);
+  const attackCount = Number(document.querySelector("#attackDice").dataset.diceCount);
+  const defenseCount = Number(document.querySelector("#defenseDice").dataset.diceCount);
   const attack = roll(attackCount).sort((a, b) => b - a);
   const defense = roll(defenseCount).sort((a, b) => b - a);
   const pairs = Math.min(attack.length, defense.length);
@@ -138,6 +138,15 @@ function handleBattle() {
   battleScore.textContent = `Attacker loses ${attackerLosses}; defender loses ${defenderLosses}`;
   addHistory(`${attackCount}v${defenseCount}`, `A ${attack.join(", ")} / D ${defense.join(", ")} · -${attackerLosses} / -${defenderLosses}`);
   playClick();
+}
+
+function setDiceCount(control, count) {
+  control.dataset.diceCount = String(count);
+  control.querySelectorAll(".dice-count").forEach((button) => {
+    const active = Number(button.dataset.diceValue) <= count;
+    button.classList.toggle("active", active);
+    button.setAttribute("aria-pressed", String(active));
+  });
 }
 
 function handleCustom() {
@@ -161,6 +170,14 @@ document.querySelectorAll("[data-roll]").forEach((button) => {
     if (button.dataset.roll === "quick") handleQuick(Number(button.dataset.count));
     if (button.dataset.roll === "battle") handleBattle();
     if (button.dataset.roll === "custom") handleCustom();
+  });
+});
+
+document.querySelectorAll(".dice-slider").forEach((control) => {
+  control.addEventListener("click", (event) => {
+    const button = event.target.closest(".dice-count");
+    if (!button) return;
+    setDiceCount(control, Number(button.dataset.diceValue));
   });
 });
 

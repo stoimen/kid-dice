@@ -47,20 +47,20 @@
           <div class="versus">
             <label>
               <span>Attacker</span>
-              <select id="attackDice">
-                <option value="1">1 die</option>
-                <option value="2">2 dice</option>
-                <option value="3" selected>3 dice</option>
-              </select>
+              <div class="dice-slider" id="attackDice" data-dice-count="3" role="group" aria-label="Attacker dice">
+                <button class="dice-count active" type="button" data-dice-value="1" aria-pressed="true">1</button>
+                <button class="dice-count active" type="button" data-dice-value="2" aria-pressed="true">2</button>
+                <button class="dice-count active" type="button" data-dice-value="3" aria-pressed="true">3</button>
+              </div>
             </label>
             <strong>vs</strong>
             <label>
               <span>Defender</span>
-              <select id="defenseDice">
-                <option value="1">1 die</option>
-                <option value="2" selected>2 dice</option>
-                <option value="3">3 dice</option>
-              </select>
+              <div class="dice-slider" id="defenseDice" data-dice-count="2" role="group" aria-label="Defender dice">
+                <button class="dice-count active" type="button" data-dice-value="1" aria-pressed="true">1</button>
+                <button class="dice-count active" type="button" data-dice-value="2" aria-pressed="true">2</button>
+                <button class="dice-count" type="button" data-dice-value="3" aria-pressed="false">3</button>
+              </div>
             </label>
           </div>
           <button class="roll-button" type="button" data-roll="battle">Roll battle</button>
